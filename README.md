@@ -110,3 +110,9 @@ sudo pip install --upgrade ollama
 - run the script 
 
 python3 soc.py
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Link to the YouTube video : https://youtu.be/7uNzES1a5J0
+
+
