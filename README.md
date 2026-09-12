@@ -77,10 +77,8 @@ sudo systemctl enable --now suricata
 
 f)  check if Sutricata is working
 
-adam@hp15s:~$ sudo ps -elf | grep suricata
-1 R root       11427       1 99  80   0 - 52695 -      14:13 ?        00:00:02 /usr/bin/suricata -D --af-packet -c /etc/suricata/suricata.yaml --pidfile /run/suricata.pid
-0 S adam       11496    3017  0  80   0 -  4320 pipe_r 14:13 pts/0    00:00:00 grep --color=auto suricata
-adam@hp15s:~$ 
+sudo ps -elf | grep suricata
+
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
