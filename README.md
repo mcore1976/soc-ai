@@ -62,7 +62,8 @@ HOME_NET: "[192.168.1.100]"
 
 sudo vi /etc/suricata/suricata.yaml
 
-# Linux high speed capture support
+look for this line and change interface name here :
+
 af-packet:
   - interface: enx582c80139263
 
