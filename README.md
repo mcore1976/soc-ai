@@ -1,4 +1,4 @@
-This is an example that show how to build AI agent based self protection for the Ubuntu Linux system that is exposed to untrusted network like the Internet.
+This is an example that show how to build AI agent based self protection for the Ubuntu Linux system exposed to untrusted network like the Internet.
 
 Following components are needed :
 
