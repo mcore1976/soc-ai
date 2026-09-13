@@ -16,12 +16,11 @@ Steps to build the whole solution :
 
 1. Install OLLAMA for you machine - an ddownload some LLM AI models 
 
+```bash
 curl -fsSL https://ollama.com/install.sh | sh
-
 ollama pull gemma3:4b 
-
 ollama list
-
+```
 ---------------------------------------------------------------------------------------------------------------------
 
 2. check the list of interfaces in your machine, and find the one exposed to untrusted network
@@ -35,8 +34,9 @@ ip a
 ```     
 -  TCPDUMP on this interface to see if this interface is really getting the malicious traffic 
 
+```bash
 sudo tcpdump -nn -i enx582c80139263
-
+```
 ---------------------------------------------------------------------------------------------------------------------
 3. Install ad configure Intrusion Detection System - Suricata IDS
 
@@ -56,7 +56,9 @@ ip a
 
 c) Edit Suricata configuration file to watch this interface and its network
 
+```bash
 sudo vi /etc/suricata/suricata.yaml
+```
 
 put your IP into HOME_NET
 
@@ -71,14 +73,14 @@ vars:
     HOME_NET: "[192.168.1.0/24]"
 ```
 
-- put you interface here - IMPORTANT !!!
+- put you interface here - IMPORTANT !!! look for this line and change interface name here :
 
-sudo vi /etc/suricata/suricata.yaml
-
-- look for this line and change interface name here :
-
+```bash
+# Linux high speed capture support
 af-packet:
   - interface: enx582c80139263
+```
+
 
 - in the "outputs" section of /etc/suricata/suricata.yaml make sure you have enabled JSON outputs and only alerting ( you may remove http, dns, tls from this section ) 
 
@@ -94,48 +96,53 @@ outputs:
 
 d) update the rules in Suricata with changes from the configuration file you edited
 
+```bash
 sudo suricata-update
+```
 
 e) enable it to run with the system startup
 
+```bash
 sudo systemctl enable --now suricata
+```
 
 f)  check if Sutricata is working
 
+```bash
 sudo ps -elf | grep suricata
-
+```
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 3. Enable FIREWALL so the script and LLM could write the rules for it 
 
 a) clear the Ubuntu firewall from settings
-
+```bash
 sudo ufw reset
-
+```
 b) enable UFW again and check the status
-
+```bash
 sudo ufw enable
-
 sudo ufw status
-
 sudo ufw status verbose
+```
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 4. Prepare AI agent with Python script
 
 - install Python and new library for ollama 
-
+```bash
 pip install --upgrade ollama
-
 sudo pip install --upgrade ollama
+```
 
 - put the script into the notepad and save under soc.py
 
 - run the script 
-
+```bash
 python3 soc.py
+```
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
