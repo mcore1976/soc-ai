@@ -23,7 +23,7 @@ ollama list
 ```
 ---------------------------------------------------------------------------------------------------------------------
 
-2. check the list of interfaces in your machine, and find the one exposed to untrusted network
+2. Check the list of interfaces in your machine, and find the one exposed to untrusted network
 
 ```bash
 ip a
@@ -45,7 +45,7 @@ a) Install the package
 ```bash
 sudo apt install suricata -y
 ```
-b)  decide which network you want to protect and put this info into Suricata configuration file,
+b)  Decide which network you want to protect and put this info into Suricata configuration file
 
 - for example check your IP address
 
@@ -60,7 +60,7 @@ c) Edit Suricata configuration file to watch this interface and its network
 sudo vi /etc/suricata/suricata.yaml
 ```
 
-put your IP into HOME_NET
+- put your IP into HOME_NET
 
 ```yaml
 vars:
@@ -73,7 +73,7 @@ vars:
     HOME_NET: "[192.168.1.0/24]"
 ```
 
-- put you interface here - IMPORTANT !!! look for this line and change interface name here :
+- put your interface here - IMPORTANT !!! look for this line and change interface name here :
 
 ```bash
 # Linux high speed capture support
@@ -81,8 +81,7 @@ af-packet:
   - interface: enx582c80139263
 ```
 
-
-- in the "outputs" section of /etc/suricata/suricata.yaml make sure you have enabled JSON outputs and only alerting ( you may remove http, dns, tls from this section ) 
+- in the "outputs" section of /etc/suricata/suricata.yaml make sure you have enabled JSON outputs and only alerting ( you may remove http, dns, tls from this section no to get unnecessary noise ) 
 
 ```yaml
 outputs:
@@ -114,7 +113,7 @@ sudo ps -elf | grep suricata
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
-3. Enable FIREWALL so the script and LLM could write the rules for it 
+3. Enable FIREWALL so the Agent and LLM could write the rules for it 
 
 a) clear the Ubuntu firewall from settings
 ```bash
