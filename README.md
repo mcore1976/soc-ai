@@ -1,10 +1,13 @@
-This is an example that show how to build AI agent based self protection for the system that is exposed to untrusted network like the Internet.
+This is an example that show how to build AI agent based self protection for the Ubuntu Linux system that is exposed to untrusted network like the Internet.
 
 Following components are needed :
 
 - Intrusion Detection system - Suricata
-- AI LLM provider - I am using Ollama and local models like gemma3:4b
-- Python script - the AI agent that reads suricata log JSON file and sends the data to LLM for evaluation
+  
+- AI LLM API provider - I am using Ollama and local models like gemma3:4b, but you can use whatever you have 
+  
+- Python script - the AI agent that reads Suricata log JSON file and sends the data to LLM for evaluation. The whole script has been written by AI
+  
 - Ubuntu Firewall - enforcement engine - once IDS discovered malicious communication, the UFW will be used to block it
 
 Steps to build the whole solution :
@@ -28,12 +31,9 @@ ip a
 8: enx582c80139263: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 1000
     link/ether 58:2c:80:13:92:63 brd ff:ff:ff:ff:ff:ff
     inet 192.168.1.100/24 brd 192.168.1.255 scope global dynamic noprefixroute enx582c80139263
-       valid_lft 86131sec preferred_lft 86131sec
-    inet6 fe80::da32:5eb9:6054:d446/64 scope link noprefixroute 
-       valid_lft forever preferred_lft forever
+     
 
-
-2. TCPDUMP on this interface to see ig this interface is really getting the traffic 
+2. TCPDUMP on this interface to see if this interface is really getting the traffic 
 
 sudo tcpdump -nn -i enx582c80139263
 
@@ -44,7 +44,9 @@ a) Install the package
 
 sudo apt install suricata -y
 
-b)  decide which network you want to protect and put this in configuration file, for example check your IP address
+b)  decide which network you want to protect and put this info into Suricata configuration file,
+
+- for example check your IP address
 
 ip a
 
@@ -62,16 +64,16 @@ HOME_NET: "[192.168.1.100]"
 
 sudo vi /etc/suricata/suricata.yaml
 
-look for this line and change interface name here :
+- look for this line and change interface name here :
 
 af-packet:
   - interface: enx582c80139263
 
-d) update the rules in Suricata
+d) update the rules in Suricata with changes from the configuration file you edited
 
 sudo suricata-update
 
-e) enable to run with the system startup
+e) enable it to run with the system startup
 
 sudo systemctl enable --now suricata
 
@@ -89,6 +91,7 @@ a) clear the Ubuntu firewall from settings
 sudo ufw reset
 
 b) enable UFW again and check the status
+
 sudo ufw enable
 
 sudo ufw status
