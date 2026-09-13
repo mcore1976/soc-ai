@@ -26,12 +26,13 @@ ollama list
 
 2. check the list of interfaces in your machine, and find the one exposed to untrusted network
 
+```bash
 ip a
 
 8: enx582c80139263: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 1000
     link/ether 58:2c:80:13:92:63 brd ff:ff:ff:ff:ff:ff
     inet 192.168.1.100/24 brd 192.168.1.255 scope global dynamic noprefixroute enx582c80139263
-     
+```     
 -  TCPDUMP on this interface to see if this interface is really getting the malicious traffic 
 
 sudo tcpdump -nn -i enx582c80139263
@@ -41,14 +42,16 @@ sudo tcpdump -nn -i enx582c80139263
 
 a) Install the package
 
+```bash
 sudo apt install suricata -y
-
+```
 b)  decide which network you want to protect and put this info into Suricata configuration file,
 
 - for example check your IP address
 
+```bash
 ip a
-
+```
 - in my case it is interface of my laptop 192.168.1.100
 
 c) Edit Suricata configuration file to watch this interface and its network
@@ -57,7 +60,16 @@ sudo vi /etc/suricata/suricata.yaml
 
 put your IP into HOME_NET
 
-HOME_NET: "[192.168.1.100]"
+```yaml
+vars:
+  # more specific is better for alert accuracy and performance
+  address-groups:
+    HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"
+    #HOME_NET: "[192.168.0.0/16]"
+    #HOME_NET: "[10.0.0.0/8]"
+    #HOME_NET: "[172.16.0.0/12]"
+    HOME_NET: "[192.168.1.0/24]"
+```
 
 - put you interface here - IMPORTANT !!!
 
