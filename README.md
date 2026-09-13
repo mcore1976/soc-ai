@@ -68,7 +68,7 @@ sudo vi /etc/suricata/suricata.yaml
 af-packet:
   - interface: enx582c80139263
 
-- int the outputs section of /etc/suricata/suricata.yaml make sure you have enabled JSON outputs and only alerting ( you may remove http, dns, tls from this section ) 
+- in the "outputs" section of /etc/suricata/suricata.yaml make sure you have enabled JSON outputs and only alerting ( you may remove http, dns, tls from this section ) 
 
 outputs:
   - eve-log:
