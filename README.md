@@ -70,7 +70,7 @@ af-packet:
 
 - in the "outputs" section of /etc/suricata/suricata.yaml make sure you have enabled JSON outputs and only alerting ( you may remove http, dns, tls from this section ) 
 
-'''
+```yaml
 outputs:
   - eve-log:
       enabled: yes
@@ -78,7 +78,8 @@ outputs:
       filename: eve.json
       types:
         - alert    
-'''
+```
+
 d) update the rules in Suricata with changes from the configuration file you edited
 
 sudo suricata-update
