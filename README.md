@@ -32,13 +32,12 @@ ip a
     link/ether 58:2c:80:13:92:63 brd ff:ff:ff:ff:ff:ff
     inet 192.168.1.100/24 brd 192.168.1.255 scope global dynamic noprefixroute enx582c80139263
      
-
-2. TCPDUMP on this interface to see if this interface is really getting the traffic 
+-  TCPDUMP on this interface to see if this interface is really getting the malicious traffic 
 
 sudo tcpdump -nn -i enx582c80139263
 
 ---------------------------------------------------------------------------------------------------------------------
-3. Install ad configure Intrusion Detection System - Suricata
+3. Install ad configure Intrusion Detection System - Suricata IDS
 
 a) Install the package
 
